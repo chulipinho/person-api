@@ -9,6 +9,8 @@ type Person struct {
 	Zipcode string `json:"zipcode"`
 }
 
+type People []*Person
+
 type PersonDB struct {
 	db PersonDAO
 	l  log.Logger
