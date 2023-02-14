@@ -6,6 +6,10 @@ import (
 
 type Mock struct{}
 
+func NewMock() *Mock {
+	return &Mock{}
+}
+
 func (db *Mock) Get() (People, error) {
 	return people, nil
 }
