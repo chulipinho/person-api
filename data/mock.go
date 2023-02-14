@@ -39,6 +39,7 @@ func (db *Mock) Put(id int, p Person) error {
 		return nil
 	}
 
+	p.Id = id
 	people[i] = &p
 	return nil
 }
