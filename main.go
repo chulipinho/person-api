@@ -23,6 +23,9 @@ func main() {
 	getR.HandleFunc("/", ph.GetAll)
 	getR.HandleFunc("/{id}", ph.GetById)
 
+	postR := r.Methods(http.MethodPost).PathPrefix("/person/").Subrouter()
+	postR.HandleFunc("/", ph.Post)
+
 	server := http.Server{
 		Addr:         ":1234",           // configure the bind address
 		Handler:      r,                 // set the default handler
