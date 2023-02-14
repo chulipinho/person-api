@@ -17,3 +17,16 @@ func (h *PersonHandler) GetAll(rw http.ResponseWriter, r *http.Request) {
 
 	data.ToJSON(p, rw)
 }
+
+func (h *PersonHandler) GetById(rw http.ResponseWriter, r *http.Request) {
+	id := getId(r)
+	h.l.Printf("[DEBUG] Getting person id %d\n", id)
+
+	p, err := h.db.GetById(id)
+	if err != nil {
+		h.l.Println("[ERROR] ", err.Error())
+		data.ToJSON(err, rw)
+	}
+
+	data.ToJSON(p, rw)
+}
