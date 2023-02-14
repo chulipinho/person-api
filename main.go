@@ -18,6 +18,7 @@ func main() {
 	ph := handlers.NewPersonHandler(db, l)
 
 	r := mux.NewRouter()
+	r.Use(handlers.PersonMiddleware)
 
 	getR := r.Methods(http.MethodGet).PathPrefix("/person/").Subrouter()
 	getR.HandleFunc("/", ph.GetAll)
