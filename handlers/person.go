@@ -20,10 +20,6 @@ func NewPersonHandler(db data.PersonDAO, l *log.Logger) *PersonHandler {
 	}
 }
 
-type GenericError struct {
-	Message string `json:"message"`
-}
-
 func getId(r *http.Request) int {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
