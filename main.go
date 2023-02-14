@@ -29,6 +29,9 @@ func main() {
 	deleteR := r.Methods(http.MethodDelete).PathPrefix("/person/").Subrouter()
 	deleteR.HandleFunc("/{id}", ph.Delete)
 
+	putR := r.Methods(http.MethodPut).PathPrefix("/person/").Subrouter()
+	putR.HandleFunc("/{id}", ph.Put)
+
 	server := http.Server{
 		Addr:         ":1234",           // configure the bind address
 		Handler:      r,                 // set the default handler
