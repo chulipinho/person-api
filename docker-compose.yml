@@ -1,0 +1,15 @@
+version: "1.0"
+
+services:
+  person-api:
+    build: .
+    ports:
+      - "1234:1234"
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER: root
+      POSTGRES_DB: person
