@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
 	"time"
 
 	"github.com/chulipinho/person-api/data"
@@ -42,10 +44,23 @@ func main() {
 		IdleTimeout:  120 * time.Second, // max time for connections using TCP Keep-Alive
 	}
 
-	l.Println("Starting server on port 1234")
+	go func() {
+		l.Println("Starting server on port 1234")
 
-	err := server.ListenAndServe()
-	if err != nil {
-		l.Fatalf("Error starting server: %s\n", err)
-	}
+		err := server.ListenAndServe()
+		if err != nil {
+			l.Fatalf("Error starting server: %s\n", err)
+		}
+	}()
+
+	ch := make(chan os.Signal)
+
+	signal.Notify(ch, os.Interrupt)
+	signal.Notify(ch, os.Kill)
+
+	sig := <-ch
+	l.Println("Exiting application. Signal: ", sig)
+
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	server.Shutdown(ctx)
 }
