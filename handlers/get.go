@@ -11,8 +11,9 @@ func (h *PersonHandler) GetAll(rw http.ResponseWriter, r *http.Request) {
 
 	p, err := h.db.Get()
 	if err != nil {
-		h.l.Println("[ERROR] ", err.Error())
+		h.l.Println("[ERROR] Getting all people: ", err.Error())
 		data.ToJSON(&GenericError{err.Error()}, rw)
+		return
 	}
 
 	data.ToJSON(p, rw)
@@ -24,8 +25,9 @@ func (h *PersonHandler) GetById(rw http.ResponseWriter, r *http.Request) {
 
 	p, err := h.db.GetById(id)
 	if err != nil {
-		h.l.Println("[ERROR] ", err.Error())
+		h.l.Println("[ERROR] Getting person: ", err.Error())
 		data.ToJSON(&GenericError{err.Error()}, rw)
+		return
 	}
 
 	data.ToJSON(p, rw)
