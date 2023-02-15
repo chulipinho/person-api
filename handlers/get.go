@@ -21,7 +21,7 @@ func (h *PersonHandler) GetAll(rw http.ResponseWriter, r *http.Request) {
 
 func (h *PersonHandler) GetById(rw http.ResponseWriter, r *http.Request) {
 	id := getId(r)
-	h.l.Printf("[DEBUG] Getting person id %d\n", id)
+	h.l.Printf("[DEBUG] Getting person ID: %d\n", id)
 
 	p, err := h.db.GetById(id)
 	if err != nil {

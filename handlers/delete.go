@@ -8,6 +8,8 @@ import (
 
 func (h *PersonHandler) Delete(rw http.ResponseWriter, r *http.Request) {
 	id := getId(r)
+	h.l.Println("[DEBUG] Deleting person ID: ", id)
+
 	err := h.db.Delete(id)
 	if err != nil {
 		h.l.Println("[ERROR] Deleting person: ", err.Error())
