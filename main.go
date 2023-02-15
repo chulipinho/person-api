@@ -9,13 +9,19 @@ import (
 	"time"
 
 	"github.com/chulipinho/person-api/data"
+	"github.com/chulipinho/person-api/db"
 	"github.com/chulipinho/person-api/handlers"
 	"github.com/gorilla/mux"
 )
 
 func main() {
 	l := log.New(os.Stdout, "person-api", log.LstdFlags)
-	db := data.NewMock()
+
+	//Creates Database
+	db := db.NewDatabase(&data.Person{})
+
+	// Uses mock data
+	// db := data.NewMock()
 
 	ph := handlers.NewPersonHandler(db, l)
 
