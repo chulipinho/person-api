@@ -1,7 +1,7 @@
 package data
 
 type PersonDAO interface {
-	Get() (People, error)
+	Get() ([]Person, error)
 	GetById(int) (*Person, error)
 	Post(Person) error
 	Put(int, Person) error
