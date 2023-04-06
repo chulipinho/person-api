@@ -10,11 +10,11 @@ import (
 )
 
 type PersonHandler struct {
-	db data.PersonDAO
+	db data.IPersonDAO
 	l  *log.Logger
 }
 
-func NewPersonHandler(db data.PersonDAO, l *log.Logger) *PersonHandler {
+func NewPersonHandler(db data.IPersonDAO, l *log.Logger) *PersonHandler {
 	return &PersonHandler{
 		db, l,
 	}

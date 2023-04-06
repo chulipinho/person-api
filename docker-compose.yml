@@ -7,6 +7,9 @@ services:
       - "1234:1234"
     depends_on:
       - db
+    environment:
+      - PORT=":1234"
+      - USEMOCK="false"
   
   db:
     image: postgres

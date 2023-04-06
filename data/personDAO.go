@@ -1,6 +1,6 @@
 package data
 
-type PersonDAO interface {
+type IPersonDAO interface {
 	Get() ([]Person, error)
 	GetById(int) (*Person, error)
 	Post(Person) error

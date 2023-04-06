@@ -10,7 +10,7 @@ func NewMock() *Mock {
 	return &Mock{}
 }
 
-func (db *Mock) Get() (People, error) {
+func (db *Mock) Get() ([]Person, error) {
 	return people, nil
 }
 
@@ -27,7 +27,7 @@ func (db *Mock) Post(p Person) error {
 	if p.Id == 0 {
 		p.Id = getLastId() + 1
 	}
-	people = append(people, &p)
+	people = append(people, p)
 
 	return nil
 }
@@ -40,7 +40,7 @@ func (db *Mock) Put(id int, p Person) error {
 	}
 
 	p.Id = id
-	people[i] = &p
+	people[i] = p
 	return nil
 }
 
@@ -58,7 +58,7 @@ func (db *Mock) Delete(id int) error {
 func findPersonById(id int) (*Person, int) {
 	for i, p := range people {
 		if p.Id == id {
-			return p, i
+			return &p, i
 		}
 	}
 
@@ -70,7 +70,7 @@ func getLastId() int {
 	return people[len-1].Id
 }
 
-var people = []*Person{
+var people = []Person{
 	{
 		Id:      1,
 		Name:    "Adler",
